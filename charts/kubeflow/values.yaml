@@ -91,7 +91,7 @@ katib:
             name:
             key: driver
         host:
-          value: katib-mysql-host
+          value: mysql.kubeflow.svc.cluster.local
           secretKeyRef:
             name:
             key: host
