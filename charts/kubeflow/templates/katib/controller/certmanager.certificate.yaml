@@ -1,9 +1,12 @@
-{{- if (include "kubeflow.katib.enabled" . | eq "true") -}}
+{{- if (include "kubeflow.katib.controller.enabledWithCertManager" . )}}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: katib-webhook-cert
+  labels:
+    {{- include "kubeflow.katib.controller.labels" . | nindent 4 }}
+  name: {{ include "kubeflow.katib.controller.certName" . }}
+  namespace: {{ include "kubeflow.namespace" . }}
 spec:
   isCA: true
   commonName: {{ .Values.katib.controller.name }}.{{ .Release.Namespace }}.svc
@@ -14,11 +17,4 @@ spec:
     kind: Issuer
     name: katib-selfsigned-issuer
   secretName: katib-webhook-cert
----
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: katib-selfsigned-issuer
-spec:
-  selfSigned: {}
 {{- end }}
