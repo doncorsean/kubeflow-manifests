@@ -267,3 +267,15 @@ and
     .Values.katib.controller.podDisruptionBudget
 )}}
 {{- end }}
+
+{{- define "kubeflow.katib.controller.validatingWebhookName" -}}
+{{ printf "%s-%s" (include "kubeflow.katib.controller.name" .) "validating" }}
+{{- end }}
+
+{{- define "kubeflow.katib.controller.mutatingWebhookName" -}}
+{{ printf "%s-%s" (include "kubeflow.katib.controller.name" .) "mutating" }}
+{{- end }}
+
+{{- define "kubeflow.katib.controller.certName" -}}
+{{ printf "%s-%s" (include "kubeflow.katib.controller.name" .) "cert" }}
+{{- end }}
