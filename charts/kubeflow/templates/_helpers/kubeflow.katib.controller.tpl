@@ -268,6 +268,21 @@ and
 )}}
 {{- end }}
 
+{{/*
+Kubeflow Katib Controller certificate manager.
+*/}}
+{{- define "kubeflow.katib.controller.enabledWithCertManager" -}}
+{{- ternary true "" (
+    and
+        (include "kubeflow.katib.controller.enabled" . | eq "true" )
+        (include "kubeflow.certManagerIntegration.enabled" . | eq "true" )
+)}}
+{{- end }}
+
+{{- define "kubeflow.katib.controller.certIssuerName" -}}
+{{ printf "%s-%s" (include "kubeflow.katib.controller.name" .) "selfsigned-issuer" }}
+{{- end }}
+
 {{- define "kubeflow.katib.controller.validatingWebhookName" -}}
 {{ printf "%s-%s" (include "kubeflow.katib.controller.name" .) "validating" }}
 {{- end }}
