@@ -15,6 +15,6 @@ spec:
     - {{ .Values.katib.controller.name }}.{{- .Release.Namespace }}.svc.cluster.local
   issuerRef:
     kind: Issuer
-    name: katib-selfsigned-issuer
-  secretName: katib-webhook-cert
+    name: {{ include "kubeflow.katib.controller.certIssuerName" . }}
+  secretName: {{ include "kubeflow.katib.controller.tlsCertSecretName" . }}
 {{- end }}

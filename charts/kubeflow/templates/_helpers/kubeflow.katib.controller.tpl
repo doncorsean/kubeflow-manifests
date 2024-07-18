@@ -283,6 +283,10 @@ Kubeflow Katib Controller certificate manager.
 {{ printf "%s-%s" (include "kubeflow.katib.controller.name" .) "selfsigned-issuer" }}
 {{- end }}
 
+{{- define "kubeflow.katib.controller.tlsCertSecretName" -}}
+{{ printf "%s-%s" (include "kubeflow.katib.controller.name" .) "tls-certs" }}
+{{- end }}
+
 {{- define "kubeflow.katib.controller.validatingWebhookName" -}}
 {{ printf "%s-%s" (include "kubeflow.katib.controller.name" .) "validating" }}
 {{- end }}
