@@ -11,8 +11,10 @@ spec:
   isCA: true
   commonName: {{ .Values.katib.controller.name }}.{{ .Release.Namespace }}.svc
   dnsNames:
-    - {{ .Values.katib.controller.name }}.{{- .Release.Namespace }}.svc
-    - {{ .Values.katib.controller.name }}.{{- .Release.Namespace }}.svc.cluster.local
+    - {{ include "kubeflow.katib.controller.svc.name" . }}
+    - {{ include "kubeflow.katib.controller.svc.addressWithNs" . }}
+    - {{ include "kubeflow.katib.controller.svc.addressWithSvc" . }}
+    - {{ include "kubeflow.katib.controller.svc.fqdn" . }}
   issuerRef:
     kind: Issuer
     name: {{ include "kubeflow.katib.controller.certIssuerName" . }}
